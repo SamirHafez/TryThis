@@ -1,0 +1,483 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{33011C20-C343-4731-BE47-3496839E8AA5}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TryThis</RootNamespace>
+    <AssemblyName>TryThis</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Roslyn.Compilers">
+      <HintPath>..\packages\Roslyn.Compilers.Common.1.2.20906.2\lib\net45\Roslyn.Compilers.dll</HintPath>
+    </Reference>
+    <Reference Include="Roslyn.Compilers.CSharp">
+      <HintPath>..\packages\Roslyn.Compilers.CSharp.1.2.20906.2\lib\net45\Roslyn.Compilers.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Roslyn.Services">
+      <HintPath>..\packages\Roslyn.Services.Common.1.2.20906.2\lib\net45\Roslyn.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="Roslyn.Services.CSharp">
+      <HintPath>..\packages\Roslyn.Services.CSharp.1.2.20906.2\lib\net45\Roslyn.Services.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Roslyn.Utilities">
+      <HintPath>..\packages\Roslyn.Services.Common.1.2.20906.2\lib\net45\Roslyn.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20505.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20505.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20505.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20505.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20505.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Base.css" />
+    <Content Include="Content\images\glyphicons-halflings-white.png" />
+    <Content Include="Content\images\glyphicons-halflings.png" />
+    <Content Include="Content\metro-bootstrap.css" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js">
+      <DependentUpon>bootstrap.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\codemirror-2.35\keymap\emacs.js" />
+    <Content Include="Scripts\codemirror-2.35\keymap\vim.js" />
+    <Content Include="Scripts\codemirror-2.35\lib\codemirror.css" />
+    <Content Include="Scripts\codemirror-2.35\lib\codemirror.js" />
+    <Content Include="Scripts\codemirror-2.35\lib\util\closetag.js" />
+    <Content Include="Scripts\codemirror-2.35\lib\util\dialog.css" />
+    <Content Include="Scripts\codemirror-2.35\lib\util\dialog.js" />
+    <Content Include="Scripts\codemirror-2.35\lib\util\foldcode.js" />
+    <Content Include="Scripts\codemirror-2.35\lib\util\formatting.js" />
+    <Content Include="Scripts\codemirror-2.35\lib\util\javascript-hint.js" />
+    <Content Include="Scripts\codemirror-2.35\lib\util\loadmode.js" />
+    <Content Include="Scripts\codemirror-2.35\lib\util\match-highlighter.js" />
+    <Content Include="Scripts\codemirror-2.35\lib\util\multiplex.js" />
+    <Content Include="Scripts\codemirror-2.35\lib\util\overlay.js" />
+    <Content Include="Scripts\codemirror-2.35\lib\util\pig-hint.js" />
+    <Content Include="Scripts\codemirror-2.35\lib\util\runmode-standalone.js" />
+    <Content Include="Scripts\codemirror-2.35\lib\util\runmode.js" />
+    <Content Include="Scripts\codemirror-2.35\lib\util\search.js" />
+    <Content Include="Scripts\codemirror-2.35\lib\util\searchcursor.js" />
+    <Content Include="Scripts\codemirror-2.35\lib\util\simple-hint.css" />
+    <Content Include="Scripts\codemirror-2.35\lib\util\simple-hint.js" />
+    <Content Include="Scripts\codemirror-2.35\lib\util\xml-hint.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\clike\clike.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\clojure\clojure.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\coffeescript\coffeescript.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\commonlisp\commonlisp.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\css\css.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\css\test.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\diff\diff.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\ecl\ecl.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\erlang\erlang.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\gfm\gfm.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\gfm\test.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\go\go.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\groovy\groovy.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\haskell\haskell.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\haxe\haxe.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\htmlembedded\htmlembedded.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\htmlmixed\htmlmixed.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\javascript\javascript.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\jinja2\jinja2.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\less\less.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\lua\lua.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\markdown\markdown.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\markdown\test.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\mysql\mysql.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\ntriples\ntriples.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\ocaml\ocaml.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\pascal\pascal.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\perl\perl.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\php\php.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\pig\pig.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\plsql\plsql.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\properties\properties.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\python\LICENSE.txt" />
+    <Content Include="Scripts\codemirror-2.35\mode\python\python.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\rpm\changes\changes.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\rpm\spec\spec.css" />
+    <Content Include="Scripts\codemirror-2.35\mode\rpm\spec\spec.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\rst\rst.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\ruby\ruby.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\rust\rust.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\r\r.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\scheme\scheme.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\shell\shell.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\sieve\sieve.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\smalltalk\smalltalk.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\smarty\smarty.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\sparql\sparql.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\stex\stex.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\stex\test.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\tiddlywiki\tiddlywiki.css" />
+    <Content Include="Scripts\codemirror-2.35\mode\tiddlywiki\tiddlywiki.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\tiki\tiki.css" />
+    <Content Include="Scripts\codemirror-2.35\mode\tiki\tiki.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\vbscript\vbscript.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\vb\LICENSE.txt" />
+    <Content Include="Scripts\codemirror-2.35\mode\vb\vb.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\velocity\velocity.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\verilog\verilog.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\xml\xml.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\xquery\test\testBase.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\xquery\test\testEmptySequenceKeyword.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\xquery\test\testMultiAttr.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\xquery\test\testNamespaces.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\xquery\test\testProcessingInstructions.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\xquery\test\testQuotes.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\xquery\xquery.js" />
+    <Content Include="Scripts\codemirror-2.35\mode\yaml\yaml.js" />
+    <Content Include="Scripts\codemirror-2.35\package.json" />
+    <Content Include="Scripts\codemirror-2.35\mode\xquery\LICENSE" />
+    <Content Include="Scripts\codemirror-2.35\mode\sieve\LICENSE" />
+    <Content Include="Scripts\codemirror-2.35\mode\ruby\LICENSE" />
+    <Content Include="Scripts\codemirror-2.35\mode\r\LICENSE" />
+    <Content Include="Scripts\codemirror-2.35\mode\perl\LICENSE" />
+    <Content Include="Scripts\codemirror-2.35\mode\pascal\LICENSE" />
+    <Content Include="Scripts\codemirror-2.35\mode\coffeescript\LICENSE" />
+    <Content Include="Scripts\codemirror-2.35\LICENSE" />
+    <None Include="Scripts\jquery-1.8.3.intellisense.js">
+      <DependentUpon>jquery-1.8.3.js</DependentUpon>
+    </None>
+    <Content Include="Scripts\codemirror-2.35\theme\ambiance.css" />
+    <Content Include="Scripts\codemirror-2.35\theme\blackboard.css" />
+    <Content Include="Scripts\codemirror-2.35\theme\cobalt.css" />
+    <Content Include="Scripts\codemirror-2.35\theme\eclipse.css" />
+    <Content Include="Scripts\codemirror-2.35\theme\elegant.css" />
+    <Content Include="Scripts\codemirror-2.35\theme\erlang-dark.css" />
+    <Content Include="Scripts\codemirror-2.35\theme\lesser-dark.css" />
+    <Content Include="Scripts\codemirror-2.35\theme\monokai.css" />
+    <Content Include="Scripts\codemirror-2.35\theme\neat.css" />
+    <Content Include="Scripts\codemirror-2.35\theme\night.css" />
+    <Content Include="Scripts\codemirror-2.35\theme\rubyblue.css" />
+    <Content Include="Scripts\codemirror-2.35\theme\vibrant-ink.css" />
+    <Content Include="Scripts\codemirror-2.35\theme\xq-dark.css" />
+    <Content Include="Scripts\jquery-1.8.3.js" />
+    <Content Include="Scripts\jquery-1.8.3.min.js">
+      <DependentUpon>jquery-1.8.3.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\less.min.js" />
+    <Content Include="Scripts\modernizr-2.0.6-development-only.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\wells.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\variables.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\utilities.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\type.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\tooltip.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\thumbnails.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\tables.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\sprites.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\scaffolding.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\responsive-utilities.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\responsive-navbar.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\responsive-768px-979px.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\responsive-767px-max.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\responsive-1200px-min.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\responsive.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\reset.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\progress-bars.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\popovers.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\pagination.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\pager.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\navs.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\navbar.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\modals.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\mixins.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\layouts.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\labels-badges.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\hero-unit.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\grid.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\forms.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\dropdowns.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\component-animations.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\code.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\close.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\carousel.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\buttons.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\button-groups.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\breadcrumbs.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\bootstrap.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\alerts.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\accordion.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\metro-bootstrap\wells.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\metro-bootstrap\variables.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\metro-bootstrap\type.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\metro-bootstrap\tiles.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\metro-bootstrap\thumbnails.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\metro-bootstrap\progress-bars.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\metro-bootstrap\pagination.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\metro-bootstrap\pager.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\metro-bootstrap\navs.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\metro-bootstrap\navbar.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\metro-bootstrap\metro-bootstrap.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\metro-bootstrap\labels-badges.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\metro-bootstrap\icons.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\metro-bootstrap\hero-unit.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\metro-bootstrap\forms.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\metro-bootstrap\code.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\metro-bootstrap\buttons.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\metro-bootstrap\button-groups.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\metro-bootstrap\breadcrumbs.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\less\metro-bootstrap\alerts.less" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:42482/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

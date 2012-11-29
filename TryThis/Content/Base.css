@@ -1,0 +1,18 @@
+﻿body {
+    width: 960px;
+    margin: 0 auto;
+}
+
+#code {
+    width: 958px;
+    height: 500px;
+    padding: 0px;
+    margin: 0px;
+    resize: none;
+    font-family: "Consolas";
+}
+
+#error {
+    margin: 0px;
+    margin-top: 20px;
+}

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>CodeMirror</id>
+    <version>2.35</version>
+    <title>CodeMirror</title>
+    <authors>Marijn Haverbeke</authors>
+    <owners>Marijn Haverbeke</owners>
+    <licenseUrl>http://codemirror.net/LICENSE</licenseUrl>
+    <projectUrl>http://codemirror.net/</projectUrl>
+    <iconUrl>http://codemirror.net/doc/baboon.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>CodeMirror is a JavaScript library that can be used to create a relatively pleasant editor interface for code-like content ― computer programs, HTML markup, and similar. If a mode has been written for the language you are editing, the code will be coloured, and the editor will optionally help you with indentation.</description>
+    <summary>Javascript based editor for al kinds of languages like: HTML,CSS,XML,C#, Javascript and many more.</summary>
+    <releaseNotes>•New (sub) mode: TypeScript.
+•Don't overwrite (insert key) when pasing.
+•Fix several bugs in markText/undo interaction.
+•Better indentation of JavaScript code without semicolons.
+•Add defineInitHook function.
+•New mode: Common Lisp.
+•Fix right-click select-all on most browsers.
+•Change the way highlighting happens:
+  Saves memory and CPU cycles.
+  compareStates is no longer needed.
+  onHighlightComplete no longer works.
+•Integrate mode (Markdown, XQuery, CSS, sTex) tests in central testsuite.
+•Add a CodeMirror.version property.
+•More robust handling of nested modes in formatting and closetag plug-ins.
+•Un/redo now preserves marked text and bookmarks.
+•New mode: Sieve.
+•New getViewPort and onViewportChange API.
+•Configurable cursor blink rate.
+•Make binding a key to false disabling handling (again).
+•Show non-printing characters as red dots.
+•More tweaks to the scrolling model.
+•Expanded testsuite. Basic linter added.
+•Remove most uses of innerHTML. Remove CodeMirror.htmlEscape.</releaseNotes>
+    <tags>Browser Code Editor</tags>
+  </metadata>
+</package>
