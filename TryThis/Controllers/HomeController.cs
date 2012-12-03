@@ -3,8 +3,11 @@
 namespace TryThis.Controllers
 {
     using Roslyn.Compilers;
+    using Roslyn.Compilers.CSharp;
     using Roslyn.Scripting;
     using Roslyn.Scripting.CSharp;
+    using System;
+    using System.Linq;
 
     public class HomeController : Controller
     {
@@ -17,33 +20,19 @@ namespace TryThis.Controllers
 
         public JsonResult Compile(string code)
         {
+            session.AddReference("System");
             session.AddReference("System.Core");
-            session.AddReference("System.Linq");
-
             try
             {
                 var executionResult = session.Execute(code);
-                return Json(new {result = executionResult}, JsonRequestBehavior.AllowGet);
+                return Json(new { result = executionResult }, JsonRequestBehavior.AllowGet);
             }
-            catch(CompilationErrorException e)
+            catch (Exception e)
             {
-                return Json(new {error = e.Message}, JsonRequestBehavior.AllowGet);
+                return Json(new { error = e.Message }, JsonRequestBehavior.AllowGet);
             }
 
 
-        }
-
-        [HttpPost]
-        public ActionResult Index(string code)
-        {
-            var engine = new ScriptEngine();
-            var session = engine.CreateSession();
-            session.AddReference("System.Core");
-            session.AddReference("System.Linq");
-
-            var execution = session.Execute(code);
-
-            return this.View("Index", new { result = execution});
         }
     }
 }
