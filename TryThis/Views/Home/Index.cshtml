@@ -1,47 +1,17 @@
 ﻿@model object
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "type.run";
 }
 
-<h1>type. build. run.</h1>
+<div class="page-header">
+    <h1>type.run</h1>
+</div>
 
-<div class="alert alert-success" id="error">Build successful</div>
+<div class="alert alert-success" id="error">Build successful.</div>
 <textarea id="code"></textarea>
 <div id="result" class="alert alert-info"></div>
 
-@section scripts
-{
-    <script type="text/javascript">
-        var errorHandle;
-
-        function compile() {
-            $.get('@Url.Action("Compile")', { code: myCodeMirror.getValue() }, function (compiled) {
-                if (errorHandle)
-                    myCodeMirror.clearMarker(errorHandle);
-
-                if (compiled.error) {
-                    var lineNumber = compiled.error.substr(1, compiled.error.indexOf(",")-1);
-                    errorHandle = myCodeMirror.setMarker(parseInt(lineNumber)-1, "●");
-                    $("#result").text("");
-                    $("#error").addClass("alert-error");
-                    $("#error").removeClass("alert-success");
-                    $("#error").text(compiled.error);
-                }
-                else {
-                    $("#result").text(compiled.result);
-                    $("#error").removeClass("alert-error");
-                    $("#error").addClass("alert-success");
-                    $("#error").text("Build successful");
-                }
-            });
-        }
-        
-        var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("code"), {
-            lineNumbers: true,
-            onChange: compile,
-            autofocus: true,
-            mode: "text/x-csharp",
-            theme: "neat"
-        });
-    </script>
+@section scripts{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/ts/CodeEditor.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/ts/home/index.js")"></script>
 }

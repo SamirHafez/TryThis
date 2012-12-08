@@ -246,12 +246,34 @@
     <Content Include="Scripts\codemirror-2.35\theme\rubyblue.css" />
     <Content Include="Scripts\codemirror-2.35\theme\vibrant-ink.css" />
     <Content Include="Scripts\codemirror-2.35\theme\xq-dark.css" />
+    <Content Include="Scripts\codemirror-3.0.d.ts" />
     <Content Include="Scripts\jquery-1.8.3.js" />
     <Content Include="Scripts\jquery-1.8.3.min.js">
       <DependentUpon>jquery-1.8.3.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\jquery-1.8.d.ts" />
     <Content Include="Scripts\less.min.js" />
     <Content Include="Scripts\modernizr-2.0.6-development-only.js" />
+    <Content Include="Scripts\ts\home\index.js.map">
+      <DependentUpon>index.ts</DependentUpon>
+    </Content>
+    <Content Include="Scripts\ts\CodeEditor.js.map">
+      <DependentUpon>CodeEditor.ts</DependentUpon>
+    </Content>
+    <TypeScriptCompile Include="Scripts\ts\CodeEditor.ts" />
+    <Content Include="Scripts\ts\CodeEditor.js">
+      <DependentUpon>CodeEditor.ts</DependentUpon>
+    </Content>
+    <Content Include="Scripts\ts\CodeEditor.min.js">
+      <DependentUpon>CodeEditor.ts</DependentUpon>
+    </Content>
+    <TypeScriptCompile Include="Scripts\ts\home\index.ts" />
+    <Content Include="Scripts\ts\home\index.js">
+      <DependentUpon>index.ts</DependentUpon>
+    </Content>
+    <Content Include="Scripts\ts\home\index.min.js">
+      <DependentUpon>index.ts</DependentUpon>
+    </Content>
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
