@@ -3,12 +3,8 @@
     margin: 0 auto;
 }
 
-#code {
-    width: 958px;
+.CodeMirror {
     height: 500px;
-    padding: 0px;
-    margin: 0px;
-    resize: none;
     font-family: "Consolas";
 }
 

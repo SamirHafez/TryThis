@@ -7,7 +7,7 @@ module type.run {
         errorHandle: CodeMirrorLineHandle;
         compileTimeoutHandle: number;
 
-        constructor(public editorElement: string, public resultElement: string, public errorElement: string, public compileTimeout? = 1000) {
+        constructor(public editorElement: string, public resultElement: string, public compileTimeout? = 1000) {
             var that = this;
             this.editor = CodeMirror.fromTextArea(<HTMLTextAreaElement>$(editorElement)[0], {
                 lineNumbers: true,
@@ -18,14 +18,21 @@ module type.run {
             });
         }
 
-        private compile(editor: CodeMirrorEditor) {
+        private compile(editor: CodeMirrorEditor, change: CodeMirrorChange) {
+            var skip = false;
+            for (var i in change.text)
+                if (!change.text[i] || /^\s+$/g.test(change.text[i])) {
+                    skip = true;
+                    break;
+                }
+            if (skip) return;
             clearTimeout(this.compileTimeoutHandle);
             this.compileTimeoutHandle = setTimeout(() => {
                 if (this.errorHandle)
                     this.editor.clearMarker(this.errorHandle);
                 $.ajax(Endpoints.Compile, {
                     type: "GET",
-                    data: { code: this.editor.getValue() },
+                    data: { code: editor.getValue() },
                     success: (compiled: CompileResult) => compiled.error ? this.error(compiled.error) : this.success(compiled.result),
                     //timeout: 5000,
                     error: (jqXhr, textStatus) => {
@@ -45,19 +52,15 @@ module type.run {
             var lineNumber = error.substr(1, error.indexOf(",") - 1);
             this.errorHandle = this.editor.setMarker((parseInt(lineNumber) || 1) - 1, "●");
 
-            $(this.resultElement).text("");
-
-            $(this.errorElement).addClass("alert-error")
-                                .removeClass("alert-success")
-                                .text(error);
+            $(this.resultElement).addClass("alert-error")
+                                 .removeClass("alert-success")
+                                 .text(error);
         }
 
         private success(result) {
-            $(this.resultElement).text(result);
-
-            $(this.errorElement).removeClass("alert-error")
-                                .addClass("alert-success")
-                                .text("Build successful.");
+            $(this.resultElement).addClass("alert-success")
+                                 .removeClass("alert-error")
+                                 .text(result || "");
         }
     }
 

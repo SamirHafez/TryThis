@@ -2,12 +2,9 @@
 
 namespace TryThis.Controllers
 {
-    using Roslyn.Compilers;
-    using Roslyn.Compilers.CSharp;
     using Roslyn.Scripting;
     using Roslyn.Scripting.CSharp;
     using System;
-    using System.Linq;
     using System.Threading.Tasks;
 
     public class HomeController : Controller

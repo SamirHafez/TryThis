@@ -2,14 +2,14 @@
 @{
     ViewBag.Title = "type.run";
 }
+<link href="~/Content/Base.css" rel="stylesheet" />
 
 <div class="page-header">
     <h1>type.run</h1>
 </div>
 
-<div class="alert alert-success" id="error">Build successful.</div>
 <textarea id="code"></textarea>
-<div id="result" class="alert alert-info"></div>
+<div id="result" class="alert alert-success"></div>
 
 @section scripts{
     <script type="text/javascript" src="@Url.Content("~/Scripts/ts/CodeEditor.js")"></script>
