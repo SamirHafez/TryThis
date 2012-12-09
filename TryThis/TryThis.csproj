@@ -48,6 +48,9 @@
       <HintPath>..\packages\WebGrease.1.1.0\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Roslyn.Compilers">
       <HintPath>..\packages\Roslyn.Compilers.Common.1.2.20906.2\lib\net45\Roslyn.Compilers.dll</HintPath>
     </Reference>
@@ -117,6 +120,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Core\Compiler.cs" />
+    <Compile Include="Core\IO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -155,80 +160,7 @@
     <Content Include="Scripts\codemirror-2.35\lib\util\simple-hint.js" />
     <Content Include="Scripts\codemirror-2.35\lib\util\xml-hint.js" />
     <Content Include="Scripts\codemirror-2.35\mode\clike\clike.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\clojure\clojure.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\coffeescript\coffeescript.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\commonlisp\commonlisp.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\css\css.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\css\test.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\diff\diff.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\ecl\ecl.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\erlang\erlang.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\gfm\gfm.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\gfm\test.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\go\go.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\groovy\groovy.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\haskell\haskell.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\haxe\haxe.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\htmlembedded\htmlembedded.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\htmlmixed\htmlmixed.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\javascript\javascript.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\jinja2\jinja2.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\less\less.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\lua\lua.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\markdown\markdown.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\markdown\test.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\mysql\mysql.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\ntriples\ntriples.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\ocaml\ocaml.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\pascal\pascal.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\perl\perl.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\php\php.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\pig\pig.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\plsql\plsql.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\properties\properties.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\python\LICENSE.txt" />
-    <Content Include="Scripts\codemirror-2.35\mode\python\python.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\rpm\changes\changes.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\rpm\spec\spec.css" />
-    <Content Include="Scripts\codemirror-2.35\mode\rpm\spec\spec.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\rst\rst.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\ruby\ruby.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\rust\rust.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\r\r.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\scheme\scheme.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\shell\shell.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\sieve\sieve.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\smalltalk\smalltalk.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\smarty\smarty.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\sparql\sparql.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\stex\stex.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\stex\test.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\tiddlywiki\tiddlywiki.css" />
-    <Content Include="Scripts\codemirror-2.35\mode\tiddlywiki\tiddlywiki.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\tiki\tiki.css" />
-    <Content Include="Scripts\codemirror-2.35\mode\tiki\tiki.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\vbscript\vbscript.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\vb\LICENSE.txt" />
-    <Content Include="Scripts\codemirror-2.35\mode\vb\vb.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\velocity\velocity.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\verilog\verilog.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\xml\xml.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\xquery\test\testBase.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\xquery\test\testEmptySequenceKeyword.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\xquery\test\testMultiAttr.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\xquery\test\testNamespaces.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\xquery\test\testProcessingInstructions.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\xquery\test\testQuotes.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\xquery\xquery.js" />
-    <Content Include="Scripts\codemirror-2.35\mode\yaml\yaml.js" />
     <Content Include="Scripts\codemirror-2.35\package.json" />
-    <Content Include="Scripts\codemirror-2.35\mode\xquery\LICENSE" />
-    <Content Include="Scripts\codemirror-2.35\mode\sieve\LICENSE" />
-    <Content Include="Scripts\codemirror-2.35\mode\ruby\LICENSE" />
-    <Content Include="Scripts\codemirror-2.35\mode\r\LICENSE" />
-    <Content Include="Scripts\codemirror-2.35\mode\perl\LICENSE" />
-    <Content Include="Scripts\codemirror-2.35\mode\pascal\LICENSE" />
-    <Content Include="Scripts\codemirror-2.35\mode\coffeescript\LICENSE" />
     <Content Include="Scripts\codemirror-2.35\LICENSE" />
     <None Include="Scripts\jquery-1.8.3.intellisense.js">
       <DependentUpon>jquery-1.8.3.js</DependentUpon>
@@ -260,6 +192,7 @@
     <Content Include="Scripts\ts\CodeEditor.js.map">
       <DependentUpon>CodeEditor.ts</DependentUpon>
     </Content>
+    <Content Include="Views\Shared\_HelpPartial.cshtml" />
     <TypeScriptCompile Include="Scripts\ts\CodeEditor.ts" />
     <Content Include="Scripts\ts\CodeEditor.js">
       <DependentUpon>CodeEditor.ts</DependentUpon>
@@ -293,7 +226,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

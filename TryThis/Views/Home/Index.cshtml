@@ -8,8 +8,8 @@
     <h1>type.run</h1>
 </div>
 
-<textarea id="code"></textarea>
-<div id="result" class="alert alert-success"></div>
+<textarea id="code" style="display: none">@ViewBag.Code</textarea>
+<div id="result" class="alert alert-success">@ViewBag.Result</div>
 
 @section scripts{
     <script type="text/javascript" src="@Url.Content("~/Scripts/ts/CodeEditor.js")"></script>

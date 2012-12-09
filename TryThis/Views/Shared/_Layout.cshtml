@@ -10,8 +10,20 @@
     @Styles.Render("~/css/libs")
 </head>
 <body>
+    <div class="overlay">
+
+        @Html.Partial("_HelpPartial")
+    </div>
+
     @RenderBody()
 
     @RenderSection("scripts", required: false)
+
+    <footer class="footer">
+        by <a href="http://compilinggibb.blogspot.pt/" target="_blank">Samir Hafez</a>
+        <span class="actions">
+            <a href="javascript: $('.overlay').css('visibility', 'visible');">Help</a>
+        </span>
+    </footer>
 </body>
 </html>

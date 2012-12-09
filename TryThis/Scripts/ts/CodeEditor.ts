@@ -14,8 +14,12 @@ module type.run {
                 onChange: this.compile.bind(that),
                 autofocus: true,
                 mode: "text/x-csharp",
-                theme: "neat"
+                theme: "neat",
+                extraKeys: {
+                    "Ctrl-S": this.save.bind(that)
+                }
             });
+            this.editor.setSize(960, 500);
         }
 
         private compile(editor: CodeMirrorEditor, change: CodeMirrorChange) {
@@ -36,10 +40,10 @@ module type.run {
                     success: (compiled: CompileResult) => compiled.error ? this.error(compiled.error) : this.success(compiled.result),
                     //timeout: 5000,
                     error: (jqXhr, textStatus) => {
-                        if (textStatus === "timeout")
-                            this.error("Request timeout. This can occur when the code contains infinite loops. Please review it, and try again.");
-                        else
-                            this.error("Error while sending code for compilation. Please, try again.");
+                        //if (textStatus === "timeout")
+                        //    this.error("Request timeout. This can occur when the code contains infinite loops. Please review it, and try again.");
+                        //else
+                        this.error("Error while sending code for compilation. Please, try again.");
                     },
                     cache: false,
                     contentType: "application/json",
@@ -52,24 +56,46 @@ module type.run {
             var lineNumber = error.substr(1, error.indexOf(",") - 1);
             this.errorHandle = this.editor.setMarker((parseInt(lineNumber) || 1) - 1, "●");
 
-            $(this.resultElement).addClass("alert-error")
-                                 .removeClass("alert-success")
-                                 .text(error);
+            $(this.resultElement).fadeOut('fast', () => {
+                $(this.resultElement).addClass("alert-error")
+                                     .removeClass("alert-success")
+                                     .text(error)
+                                     .slideDown('fast');
+            });
         }
 
         private success(result) {
-            $(this.resultElement).addClass("alert-success")
-                                 .removeClass("alert-error")
-                                 .text(result || "");
+            $(this.resultElement).fadeOut('fast', () => {
+                $(this.resultElement).addClass("alert-success")
+                                     .removeClass("alert-error")
+                                     .text(result || "")
+                                     .slideDown('fast');
+            });
+        }
+
+        private save(editor: CodeMirrorEditor) {
+            var code = editor.getValue();
+
+            if(!code || /^\s+$/g.test(code))
+                return;
+
+            $.post(Endpoints.Save, { code: editor.getValue(), result: $(this.resultElement).text() }, (result: SaveResult) => {
+                history.replaceState(null, "saved code", result.url);
+            });
         }
     }
 
     class Endpoints {
         static get Compile() { return "Home/Compile"; }
+        static get Save() { return "Home/Save"; }
     }
 
     interface CompileResult {
         error: string;
         result: string;
+    }
+
+    interface SaveResult {
+        url: string;
     }
 }

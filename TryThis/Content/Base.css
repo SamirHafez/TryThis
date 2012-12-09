@@ -8,6 +8,29 @@
     font-family: "Consolas";
 }
 
-#error {
-    margin: 0px;
+.footer {
+    clear: both;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: #EEE;
+}
+
+.actions {
+    float: right;
+}
+
+.overlay {
+    visibility: hidden;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    z-index: 1000;
+}
+
+#help {
+    /*width: 300px;*/
+    margin: 100px auto;
 }

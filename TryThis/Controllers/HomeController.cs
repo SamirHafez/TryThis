@@ -2,44 +2,74 @@
 
 namespace TryThis.Controllers
 {
-    using Roslyn.Scripting;
-    using Roslyn.Scripting.CSharp;
     using System;
+    using System.Threading;
     using System.Threading.Tasks;
+    using TryThis.Core;
 
     public class HomeController : Controller
     {
-        private Session session = new ScriptEngine().CreateSession();
+        private Compiler _compiler;
+        private IO _io;
 
-        public ActionResult Index(object result)
+        protected override void Initialize(System.Web.Routing.RequestContext requestContext)
         {
-            return this.View("Index", result);
+            base.Initialize(requestContext);
+            _compiler = new Compiler();
+            _io = new IO(Server.MapPath("~/SavedCode"));
         }
 
-        public async Task<JsonResult> Compile(string code)
+        public ActionResult Index(string id)
         {
-            Task<JsonResult> task = Task.Factory.StartNew(
-                () =>
+            if (id != null)
+            {
+                string code, result;
+                if (_io.Get(id, out code, out result))
                 {
-                    session.AddReference("System");
-                    session.AddReference("System.Core");
-                    try
-                    {
-                        var executionResult = session.Execute(code);
-                        return Json(new { result = executionResult }, JsonRequestBehavior.AllowGet);
-                    }
-                    catch (Exception e)
-                    {
-                        return Json(new { error = e.Message }, JsonRequestBehavior.AllowGet);
-                    }
-                });
+                    ViewBag.Code = code;
+                    ViewBag.Result = result;
+                }
+            }
 
-            task.Wait(5000);
+            return this.View("Index");
+        }
 
-            if (task.IsCompleted)
-                return await task;
+        //This timeout solution is HIGHLY deprecated.
+        //TODO Find a way to make the ASP.NET timeout mechanism work!
+        public JsonResult Compile(string code)
+        {
+            object result = null;
+            Exception ex = null;
+            var executionThread = new Thread(() =>
+            {
+                try
+                {
+                    result = _compiler.Compile<object>(code);
+                }
+                catch (Exception e)
+                {
+                    ex = e;
+                }
+            });
+            executionThread.Start();
 
-            return Json(new { error = "Request timeout. This can occur when the code contains infinite loops. Please review it, and try again." }, JsonRequestBehavior.AllowGet);
+            if (!executionThread.Join(5000))
+            {
+                executionThread.Abort();
+                return Json(new { error = "Request timeout. This can occur when the code contains infinite loops. Please review it, and try again." }, JsonRequestBehavior.AllowGet);
+            }
+
+            if (ex != null)
+                return Json(new { error = ex.Message }, JsonRequestBehavior.AllowGet);
+
+            return Json(new { result }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult Save(string code, string result)
+        {
+            var id = _io.Save(code, result);
+
+            return Json(new { url = id }, JsonRequestBehavior.AllowGet);
         }
     }
 }
