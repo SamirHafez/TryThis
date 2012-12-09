@@ -38,8 +38,9 @@
                         _this.editor.clearMarker(_this.errorHandle);
                     }
                     $.ajax(Endpoints.Compile, {
-                        type: "GET",
+                        type: "POST",
                         data: {
+                            __RequestVerificationToken: _this.antiForgeryToken(),
                             code: editor.getValue()
                         },
                         success: function (compiled) {
@@ -47,10 +48,7 @@
                         },
                         error: function (jqXhr, textStatus) {
                             _this.error("Error while sending code for compilation. Please, try again.");
-                        },
-                        cache: false,
-                        contentType: "application/json",
-                        dataType: "json"
+                        }
                     });
                 }, this.compileTimeout);
             };
@@ -74,11 +72,15 @@
                     return;
                 }
                 $.post(Endpoints.Save, {
+                    __RequestVerificationToken: this.antiForgeryToken(),
                     code: editor.getValue(),
                     result: $(this.resultElement).text()
                 }, function (result) {
                     history.replaceState(null, "saved code", result.url);
                 });
+            };
+            CodeEditor.prototype.antiForgeryToken = function () {
+                return $('input[name=__RequestVerificationToken]').val();
             };
             return CodeEditor;
         })();

@@ -36,6 +36,8 @@ namespace TryThis.Controllers
 
         //This timeout solution is HIGHLY deprecated.
         //TODO Find a way to make the ASP.NET timeout mechanism work!
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public JsonResult Compile(string code)
         {
             object result = null;
@@ -65,6 +67,8 @@ namespace TryThis.Controllers
             return Json(new { result }, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public JsonResult Save(string code, string result)
         {
             var id = _io.Save(code, result);

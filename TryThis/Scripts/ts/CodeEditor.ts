@@ -35,8 +35,11 @@ module type.run {
                 if (this.errorHandle)
                     this.editor.clearMarker(this.errorHandle);
                 $.ajax(Endpoints.Compile, {
-                    type: "GET",
-                    data: { code: editor.getValue() },
+                    type: "POST",
+                    data: { 
+                        __RequestVerificationToken: this.antiForgeryToken(),
+                        code: editor.getValue() 
+                    },
                     success: (compiled: CompileResult) => compiled.error ? this.error(compiled.error) : this.success(compiled.result),
                     //timeout: 5000,
                     error: (jqXhr, textStatus) => {
@@ -44,10 +47,7 @@ module type.run {
                         //    this.error("Request timeout. This can occur when the code contains infinite loops. Please review it, and try again.");
                         //else
                         this.error("Error while sending code for compilation. Please, try again.");
-                    },
-                    cache: false,
-                    contentType: "application/json",
-                    dataType: "json"
+                    }
                 })
             }, this.compileTimeout);
         }
@@ -76,12 +76,20 @@ module type.run {
         private save(editor: CodeMirrorEditor) {
             var code = editor.getValue();
 
-            if(!code || /^\s+$/g.test(code))
+            if (!code || /^\s+$/g.test(code))
                 return;
 
-            $.post(Endpoints.Save, { code: editor.getValue(), result: $(this.resultElement).text() }, (result: SaveResult) => {
+            $.post(Endpoints.Save, {
+                __RequestVerificationToken: this.antiForgeryToken(),
+                code: editor.getValue(),
+                result: $(this.resultElement).text(),
+            }, (result: SaveResult) => {
                 history.replaceState(null, "saved code", result.url);
             });
+        }
+
+        private antiForgeryToken() {
+            return $('input[name=__RequestVerificationToken]').val();
         }
     }
 
