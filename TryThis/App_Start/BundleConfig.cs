@@ -11,8 +11,6 @@ namespace TryThis.App_Start
         public static void RegisterBundles(BundleCollection bundleCollection)
         {
             bundleCollection.Add(new Bundle("~/scripts/libs", new JsMinify()).Include("~/scripts/jquery-1.8.3.js")
-                                                                             .Include("~/scripts/modernizr-2.0.6-development-only.js")
-                                                                             .Include("~/scripts/bootstrap.js")
                                                                              .Include("~/scripts/codemirror-2.35/lib/codemirror.js")
                                                                              .Include("~/scripts/codemirror-2.35/mode/clike/clike.js")
                                                                              .Include("~/scripts/ts/codeEditor.js"));
