@@ -1,5 +1,6 @@
 ﻿body {
-    width: 960px;
+    max-width: 960px;
+    min-height: 475px;
     margin: 0 auto;
 }
 
@@ -31,6 +32,5 @@
 }
 
 #help {
-    /*width: 300px;*/
     margin: 100px auto;
 }

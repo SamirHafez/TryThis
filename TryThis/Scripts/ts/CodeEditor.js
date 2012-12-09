@@ -16,7 +16,6 @@
                         "Ctrl-S": this.save.bind(that)
                     }
                 });
-                this.editor.setSize(960, 500);
             }
             CodeEditor.prototype.compile = function (editor, change) {
                 var _this = this;

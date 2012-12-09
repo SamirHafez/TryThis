@@ -19,7 +19,7 @@ module type.run {
                     "Ctrl-S": this.save.bind(that)
                 }
             });
-            this.editor.setSize(960, 500);
+            //this.editor.setSize(960, 500);
         }
 
         private compile(editor: CodeMirrorEditor, change: CodeMirrorChange) {
