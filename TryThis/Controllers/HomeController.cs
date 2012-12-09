@@ -39,7 +39,7 @@ namespace TryThis.Controllers
         public JsonResult Compile(string code)
         {
             object result = null;
-            Exception ex = null;
+            Exception exception = null;
             var executionThread = new Thread(() =>
             {
                 try
@@ -48,7 +48,7 @@ namespace TryThis.Controllers
                 }
                 catch (Exception e)
                 {
-                    ex = e;
+                    exception = e;
                 }
             });
             executionThread.Start();
@@ -59,8 +59,8 @@ namespace TryThis.Controllers
                 return Json(new { error = "Request timeout. This can occur when the code contains infinite loops. Please review it, and try again." }, JsonRequestBehavior.AllowGet);
             }
 
-            if (ex != null)
-                return Json(new { error = ex.Message }, JsonRequestBehavior.AllowGet);
+            if (exception != null)
+                return Json(new { error = exception.Message }, JsonRequestBehavior.AllowGet);
 
             return Json(new { result }, JsonRequestBehavior.AllowGet);
         }
