@@ -7,7 +7,7 @@ module type.run {
         errorHandle: CodeMirrorLineHandle;
         compileTimeoutHandle: number;
 
-        constructor(public editorElement: string, public resultElement: string, public compileTimeout? = 1000) {
+        constructor(public editorElement: string, public resultElement: string) {
             var that = this;
             this.editor = CodeMirror.fromTextArea(<HTMLTextAreaElement>$(editorElement)[0], {
                 lineNumbers: true,
@@ -49,7 +49,7 @@ module type.run {
                         this.error("Error while sending code for compilation. Please, try again.");
                     }
                 })
-            }, this.compileTimeout);
+            }, 1000);
         }
 
         private error(error) {

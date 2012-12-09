@@ -14,7 +14,8 @@ namespace TryThis.App_Start
                                                                              .Include("~/scripts/modernizr-2.0.6-development-only.js")
                                                                              .Include("~/scripts/bootstrap.js")
                                                                              .Include("~/scripts/codemirror-2.35/lib/codemirror.js")
-                                                                             .Include("~/scripts/codemirror-2.35/mode/clike/clike.js"));
+                                                                             .Include("~/scripts/codemirror-2.35/mode/clike/clike.js")
+                                                                             .Include("~/scripts/ts/codeEditor.js"));
 
             bundleCollection.Add(new Bundle("~/css/libs", new CssMinify()).Include("~/content/metro-bootstrap.css")
                                                                           .Include("~/scripts/codemirror-2.35/lib/codemirror.css")

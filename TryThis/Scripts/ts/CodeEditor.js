@@ -2,11 +2,9 @@
 (function (type) {
     (function (run) {
         var CodeEditor = (function () {
-            function CodeEditor(editorElement, resultElement, compileTimeout) {
-                if (typeof compileTimeout === "undefined") { compileTimeout = 1000; }
+            function CodeEditor(editorElement, resultElement) {
                 this.editorElement = editorElement;
                 this.resultElement = resultElement;
-                this.compileTimeout = compileTimeout;
                 var that = this;
                 this.editor = CodeMirror.fromTextArea($(editorElement)[0], {
                     lineNumbers: true,
@@ -50,7 +48,7 @@
                             _this.error("Error while sending code for compilation. Please, try again.");
                         }
                     });
-                }, this.compileTimeout);
+                }, 1000);
             };
             CodeEditor.prototype.error = function (error) {
                 var _this = this;
