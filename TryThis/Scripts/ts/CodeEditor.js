@@ -13,17 +13,27 @@
                     mode: "text/x-csharp",
                     theme: "neat",
                     extraKeys: {
-                        "Ctrl-S": this.save.bind(that)
+                        "Ctrl-S": this.save.bind(that),
+                        "F6": this.compile.bind(that),
+                        "F2": function () {
+                            return $('#shortcut').css('visibility', 'visible');
+                        },
+                        "F1": function () {
+                            return $('#help').css('visibility', 'visible');
+                        }
                     }
                 });
             }
             CodeEditor.prototype.compile = function (editor, change) {
                 var _this = this;
                 var skip = false;
-                for(var i in change.text) {
-                    if(!change.text[i] || /^\s+$/g.test(change.text[i])) {
-                        skip = true;
-                        break;
+                editor = editor || this.editor;
+                if(change) {
+                    for(var i in change.text) {
+                        if(!change.text[i] || /^\s+$/g.test(change.text[i])) {
+                            skip = true;
+                            break;
+                        }
                     }
                 }
                 if(skip) {
@@ -32,13 +42,13 @@
                 clearTimeout(this.compileTimeoutHandle);
                 this.compileTimeoutHandle = setTimeout(function () {
                     if(_this.errorHandle) {
-                        _this.editor.clearMarker(_this.errorHandle);
+                        editor.clearMarker(_this.errorHandle);
                     }
                     $.ajax(Endpoints.Compile, {
                         type: "POST",
                         data: {
                             __RequestVerificationToken: _this.antiForgeryToken(),
-                            code: editor.getValue()
+                            code: _this.editor.getValue()
                         },
                         success: function (compiled) {
                             return compiled.error ? _this.error(compiled.error) : _this.success(compiled.result);
@@ -64,7 +74,8 @@
                 });
             };
             CodeEditor.prototype.save = function (editor) {
-                var code = editor.getValue();
+                editor = editor || this.editor;
+                var code = this.editor.getValue();
                 if(!code || /^\s+$/g.test(code)) {
                     return;
                 }

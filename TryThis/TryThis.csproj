@@ -217,6 +217,7 @@
       <DependentUpon>CodeEditor.ts</DependentUpon>
     </Content>
     <Content Include="Views\Shared\_HelpPartial.cshtml" />
+    <Content Include="Views\Shared\_ShortcutPartial.cshtml" />
     <TypeScriptCompile Include="Scripts\ts\CodeEditor.ts" />
     <Content Include="Scripts\ts\CodeEditor.js">
       <DependentUpon>CodeEditor.ts</DependentUpon>

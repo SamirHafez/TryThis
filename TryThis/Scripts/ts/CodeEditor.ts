@@ -16,7 +16,10 @@ module type.run {
                 mode: "text/x-csharp",
                 theme: "neat",
                 extraKeys: {
-                    "Ctrl-S": this.save.bind(that)
+                    "Ctrl-S": this.save.bind(that),
+                    "F6": this.compile.bind(that),
+                    "F2": () => $('#shortcut').css('visibility', 'visible'),
+                    "F1": () => $('#help').css('visibility', 'visible'),
                 }
             });
             //this.editor.setSize(960, 500);
@@ -24,21 +27,23 @@ module type.run {
 
         private compile(editor: CodeMirrorEditor, change: CodeMirrorChange) {
             var skip = false;
-            for (var i in change.text)
-                if (!change.text[i] || /^\s+$/g.test(change.text[i])) {
-                    skip = true;
-                    break;
-                }
+            editor = editor || this.editor;
+            if (change)
+                for (var i in change.text)
+                    if (!change.text[i] || /^\s+$/g.test(change.text[i])) {
+                        skip = true;
+                        break;
+                    }
             if (skip) return;
             clearTimeout(this.compileTimeoutHandle);
             this.compileTimeoutHandle = setTimeout(() => {
                 if (this.errorHandle)
-                    this.editor.clearMarker(this.errorHandle);
+                    editor.clearMarker(this.errorHandle);
                 $.ajax(Endpoints.Compile, {
                     type: "POST",
-                    data: { 
+                    data: {
                         __RequestVerificationToken: this.antiForgeryToken(),
-                        code: editor.getValue() 
+                        code: this.editor.getValue()
                     },
                     success: (compiled: CompileResult) => compiled.error ? this.error(compiled.error) : this.success(compiled.result),
                     //timeout: 5000,
@@ -74,7 +79,8 @@ module type.run {
         }
 
         private save(editor: CodeMirrorEditor) {
-            var code = editor.getValue();
+            editor = editor || this.editor;
+            var code = this.editor.getValue();
 
             if (!code || /^\s+$/g.test(code))
                 return;

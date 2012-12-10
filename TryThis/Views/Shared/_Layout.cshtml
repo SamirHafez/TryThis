@@ -14,8 +14,12 @@
 <body>
     <div id="fb-root"></div>
 
-    <div class="overlay">
+    <div id="help" class="overlay">
         @Html.Partial("_HelpPartial")
+    </div>
+
+    <div id="shortcut" class="overlay">
+        @Html.Partial("_ShortcutPartial")
     </div>
 
     @RenderBody()
@@ -23,7 +27,8 @@
     <footer class="footer">
         by <a href="http://compilinggibb.blogspot.pt/" target="_blank">Samir Hafez</a>
         <span class="actions">
-            <a href="javascript: $('.overlay').css('visibility', 'visible');">Help</a>
+            <a href="javascript: $('#shortcut').css('visibility', 'visible');">Shortcuts</a>
+            <a href="javascript: $('#help').css('visibility', 'visible');">Help</a>
         </span>
         <div>
             @Facebook.LikeButton("http://typerun.apphb.com", "button_count", false, height: 20, font: "segoe ui")

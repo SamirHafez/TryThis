@@ -31,6 +31,6 @@
     z-index: 1000;
 }
 
-#help {
+.overlay-inner {
     margin: 100px auto;
 }
