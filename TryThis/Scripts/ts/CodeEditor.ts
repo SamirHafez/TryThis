@@ -68,7 +68,7 @@ module type.run {
             $(this.resultElement).fadeOut('fast', () => {
                 $(this.resultElement).addClass("alert-success")
                                      .removeClass("alert-error")
-                                     .text(result || "")
+                                     .text(result !== null ? result : "")
                                      .slideDown('fast');
             });
         }

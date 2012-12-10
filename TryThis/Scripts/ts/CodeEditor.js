@@ -60,7 +60,7 @@
             CodeEditor.prototype.success = function (result) {
                 var _this = this;
                 $(this.resultElement).fadeOut('fast', function () {
-                    $(_this.resultElement).addClass("alert-success").removeClass("alert-error").text(result || "").slideDown('fast');
+                    $(_this.resultElement).addClass("alert-success").removeClass("alert-error").text(result !== null ? result : "").slideDown('fast');
                 });
             };
             CodeEditor.prototype.save = function (editor) {
