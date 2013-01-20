@@ -5,18 +5,20 @@ namespace TryThis.Controllers
     using System;
     using System.Threading;
     using System.Threading.Tasks;
+    using System.Web.Routing;
     using TryThis.Core;
 
     public class HomeController : Controller
     {
-        private Compiler _compiler;
-        private IO _io;
+        public Compiler Compiler { get; protected set; }
+        public IO IOManager { get; protected set; }
+        public const int CompilingTime = 5000;
 
-        protected override void Initialize(System.Web.Routing.RequestContext requestContext)
+        protected override void Initialize(RequestContext requestContext)
         {
             base.Initialize(requestContext);
-            _compiler = new Compiler();
-            _io = new IO(Server.MapPath("~/SavedCode"));
+            Compiler = new Compiler();
+            IOManager = new IO(Server.MapPath("~/SavedCode"));
         }
 
         public ActionResult Index(string id)
@@ -24,7 +26,7 @@ namespace TryThis.Controllers
             if (id != null)
             {
                 string code, result;
-                if (_io.Get(id, out code, out result))
+                if (IOManager.Get(id, out code, out result))
                 {
                     ViewBag.Code = code;
                     ViewBag.Result = result;
@@ -38,6 +40,7 @@ namespace TryThis.Controllers
         //TODO Find a way to make the ASP.NET timeout mechanism work!
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public JsonResult Compile(string code)
         {
             object result = null;
@@ -46,7 +49,7 @@ namespace TryThis.Controllers
             {
                 try
                 {
-                    result = _compiler.Compile<object>(code);
+                    result = Compiler.Compile<object>(code);
                 }
                 catch (Exception e)
                 {
@@ -55,7 +58,7 @@ namespace TryThis.Controllers
             });
             executionThread.Start();
 
-            if (!executionThread.Join(5000))
+            if (!executionThread.Join(CompilingTime))
             {
                 executionThread.Abort();
                 return Json(new { error = "Request timeout. This can occur when the code contains infinite loops. Please review it, and try again." }, JsonRequestBehavior.AllowGet);
@@ -71,7 +74,7 @@ namespace TryThis.Controllers
         [ValidateAntiForgeryToken]
         public JsonResult Save(string code, string result)
         {
-            var id = _io.Save(code, result);
+            var id = IOManager.Save(code, result);
 
             return Json(new { url = id }, JsonRequestBehavior.AllowGet);
         }
